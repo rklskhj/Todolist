@@ -24,14 +24,14 @@ function Form({ setTodos, todos }) {
     }
 
     return (
-        <form className='add-form'>
+        <form onSubmit={onSubmit} className='add-form'>
             <div className='input-group'>
                 <label className='form-laber'>Title</label>
-                <input className='add-input' type="text" name='title' value={todo.title} onChange={onChangeHandler} />
+                <input className='add-input' type="text" name='title' value={todo.title} onChange={onChangeHandler} required />
                 <label className='form-laber'>Commnet</label>
-                <input id="input-body" className='add-input' type="text" name='body' value={todo.body} onChange={onChangeHandler} />
+                <input id="input-body" className='add-input' type="text" name='body' value={todo.body} onChange={onChangeHandler} required />
             </div>
-            <button className='add-button' onClick={onSubmit}>Write</button>
+            <button className='add-button'>Write</button>
         </form>
 
     )
