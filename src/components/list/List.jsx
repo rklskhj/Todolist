@@ -5,7 +5,7 @@ import './style.css';
 function List({ setTodos, todos }) {
     const onDeleteHandler = (todoId) => {
         const newTodos = todos.filter((todo) => {
-            return todo.id !== todoId; //제거
+            return todo.id !== todoId; //제거 (같지 않은걸 제외하고.. 같은 id 인 객체를 삭제) 
 
         })
         setTodos(newTodos)

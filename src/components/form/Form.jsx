@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './style.css';
+import Swal from 'sweetalert2'
 
 let number = 3;
 function Form({ setTodos, todos }) {
@@ -17,6 +18,13 @@ function Form({ setTodos, todos }) {
     };
     const onSubmit = (event) => {
         event.preventDefault();
+        if (todo.body === "" || todo.title === "") { //바디나 타이틀에 빈칸이 있을때
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '모두 입력해주세요!😥',
+            })
+        }
         if (todo.title.trim() === "" || todo.body.trim() === "") return;
         setTodos([...todos, { ...todo, id: number }]);
         setTodo(initialstate);
@@ -24,14 +32,14 @@ function Form({ setTodos, todos }) {
     }
 
     return (
-        <form onSubmit={onSubmit} className='add-form'>
+        <form className='add-form'>
             <div className='input-group'>
                 <label className='form-laber'>Title</label>
-                <input className='add-input' type="text" name='title' value={todo.title} onChange={onChangeHandler} required />
+                <input className='add-input' type="text" name='title' value={todo.title} onChange={onChangeHandler} />
                 <label className='form-laber'>Commnet</label>
-                <input id="input-body" className='add-input' type="text" name='body' value={todo.body} onChange={onChangeHandler} required />
+                <input id="input-body" className='add-input' type="text" name='body' value={todo.body} onChange={onChangeHandler} />
             </div>
-            <button className='add-button'>Write</button>
+            <button className='add-button' onClick={onSubmit}>Write</button>
         </form>
 
     )

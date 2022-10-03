@@ -21,12 +21,15 @@ const TodoList = () => {
         }
     ])
     return (
+
         <Layout>
             <Header />
             <Form setTodos={setTodos} todos={todos} />
             <List setTodos={setTodos} todos={todos} />
-            {/* <Todo /> */}
         </Layout>
+
+
+
     )
 }
 

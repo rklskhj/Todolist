@@ -10,7 +10,7 @@ function Todo({ todo, onDeleteHandler, onEditHandler }) {
             <div>
                 <button
                     className="todo-delete-button button"
-                    onClick={() => onDeleteHandler(todo.id)}
+                    onClick={() => onDeleteHandler(todo.id)} //넘길 값이 있으면 () => ~(~) 작성
                 >Delete
                 </button>
                 <button
