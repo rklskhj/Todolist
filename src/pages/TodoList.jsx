@@ -26,6 +26,7 @@ const TodoList = () => {
             <Header />
             <Form setTodos={setTodos} todos={todos} />
             <List setTodos={setTodos} todos={todos} />
+
         </Layout>
 
 
