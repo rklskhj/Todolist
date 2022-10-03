@@ -4,7 +4,7 @@ import './style.css';
 const Header = () => {
     return (
         <div className='container'>
-            <h1>My Todo List</h1>
+            <h1>- My Todo List -</h1>
         </div>
 
     )
