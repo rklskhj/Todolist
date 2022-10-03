@@ -1,0 +1,9 @@
+.container {
+  color: #463f6b;
+  align-items: center;
+  border: 1px solid #ddd;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  padding: 20px 20px;
+}
