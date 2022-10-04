@@ -14,6 +14,7 @@ function Form({ setTodos, todos }) {
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setTodo({ ...todo, [name]: value })
+        console.log(todo)
 
     };
     const onSubmit = (event) => {
@@ -40,7 +41,7 @@ function Form({ setTodos, todos }) {
             <div className='input-group'>
                 <label className='form-laber'>Title</label>
                 <input className='add-input' type="text" name='title' value={todo.title} onChange={onChangeHandler} />
-                <label className='form-laber'>Commnet</label>
+                <label className='form-laber'>Comment</label>
                 <input id="input-body" className='add-input' type="text" name='body' value={todo.body} onChange={onChangeHandler} />
             </div>
             <button className='add-button' onClick={onSubmit}>Write</button>
