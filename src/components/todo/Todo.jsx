@@ -1,24 +1,38 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { onDeleteTodo, onEditTodo } from '../../redux/modules/todos';
+// import { onDeleteTodo, onEditTodo } from '../../redux/modules/todos';
+import { deleteTodo, editTodo } from '../../redux/modules/todos';
 import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
+import { FcLike } from "react-icons/fc";
+
 function Todo({ todo }) {
     const dispatch = useDispatch();
 
+
+
+
     const onDeleteHandler = () => {
-        dispatch(onDeleteTodo({ id: todo.id }))
+        // dispatch(onDeleteTodo({ id: todo.id }))
+        dispatch(deleteTodo({ id: todo.id }))
     }
 
     const onEditHandler = () => {
-        dispatch(onEditTodo({ id: todo.id }))
+        // dispatch(onEditTodo({ id: todo.id }))
+        dispatch(editTodo({ id: todo.id }))
     }
 
     console.log("todo", todo)
     return (
         <TodoContainer>
+            <DetailLike>
+                <div><Link to={`/detail/${todo.id}`} > 상세페이지🔍 </Link></div>
+                <Line><div><FcLike className='like' /></div><p>&nbsp;{todo.like}</p></Line>
+            </DetailLike>
             <div>
-                <Link to={`/detail/${todo.id}`} state={todo}> 상세페이지🔍 </Link>
+
+                {/* useLocation state={todo} */}
                 <h2 className="todo-title">{todo.title}</h2>
                 <TodoBody>{todo.body}</TodoBody>
             </div>
@@ -51,7 +65,7 @@ const TodoContainer = styled.div`
     /* height: 150px; */
     border: 4px solid #463f6b;
     border-radius: 12px;
-    padding: 24px 18px 24px 18px;
+    padding: 19px 15px;
     box-shadow: 0 1px 3px rgba(35, 23, 46, 0.12), 0 1px 2px rgba(35, 23, 46, 0.24);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     
@@ -62,36 +76,36 @@ const TodoContainer = styled.div`
     
     .todo-delete-button{
         border: none;
-    width: 50%;
-    height: 40px;
-    border-radius: 8px;
-    cursor: pointer;
+        width: 50%;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
 
-    margin-right: 25px;
-    border: 3px solid rgba(207, 9, 9, 0.738);
-    background-color: #fff;
-    &:hover {
-        color: white;
-    border: 3px solid rgba(207, 9, 9, 0.738);
-    background-color: rgba(207, 9, 9, 0.738);
-    }
+        margin-right: 25px;
+        border: 3px solid rgba(207, 9, 9, 0.738);
+        background-color: #fff;
+        &:hover {
+            color: white;
+        border: 3px solid rgba(207, 9, 9, 0.738);
+        background-color: rgba(207, 9, 9, 0.738);
+        }
     }
 
 
     .todo-complete-button{
         border: none;
-    width: 50%;
-    height: 40px;
-    border-radius: 8px;
-    cursor: pointer;
+        width: 50%;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
 
-    border: 3px solid rgb(64, 143, 64);
-    background-color: #fff;
+        border: 3px solid rgb(64, 143, 64);
+        background-color: #fff;
 
         &:hover {
-            color: white;
-    border: 3px solid rgb(64, 143, 64);
-    background-color: rgb(99, 181, 99);
+        color: white;
+        border: 3px solid rgb(64, 143, 64);
+        background-color: rgb(99, 181, 99);
         }
     }
         
@@ -99,7 +113,7 @@ const TodoContainer = styled.div`
 `
 const ButtonSet = styled.div`
     display: flex;
-  margin-top: 24px;
+    margin-top: 24px;
 
 `
 
@@ -107,6 +121,25 @@ const TodoBody = styled.div`
     font-size: 18px;
     margin: 18px auto;
 
+`
+const DetailLike = styled.div`
+    .like{
+        font-size: 1.8vw;
+    }
+
+    p{
+        font-size: 1.3vw;
+    }
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+`
+const Line = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `
 
 

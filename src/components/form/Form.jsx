@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Swal from 'sweetalert2'
-import { onSubmitTodo } from '../../redux/modules/todos';
+import { addTodo } from '../../redux/modules/todos';
 
 // let number = 3;
 function Form() {
@@ -11,7 +11,9 @@ function Form() {
     const initialstate = {
         title: "",
         body: "",
-        isDone: false
+        like: 0,
+        isDone: false,
+
     }
     const [todo, setTodo] = useState(initialstate);
     const onChangeHandler = (event) => {
@@ -30,7 +32,8 @@ function Form() {
             })
         }
         if (todo.title.trim() === "" || todo.body.trim() === "") return;
-        dispatch(onSubmitTodo({ ...todo, id: Date.now() }))
+        // dispatch(onSubmitTodo({ ...todo, id: Date.now() }))
+        dispatch(addTodo({ ...todo, id: Date.now() }))
         setTodo(initialstate);
     }
 

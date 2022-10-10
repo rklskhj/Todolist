@@ -70,16 +70,3 @@ const ListWrapper = styled.div`
 `
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-

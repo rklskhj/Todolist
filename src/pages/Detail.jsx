@@ -1,25 +1,33 @@
 import React, { useEffect } from 'react'
-// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
+import { FcLike } from "react-icons/fc";
+import { addLikeTodo } from '../redux/modules/todos';
 
 
 const Detail = () => {
-    // const todos = useSelector(state => state.todos)
-    // const { id } = useParams();
-    // const todo = todos.find(todo => todo.id === +id)
+    const dispatch = useDispatch();
     const navigate = useNavigate()
 
+    const todos = useSelector(state => state.todos)
+    const { id } = useParams();
+    const todo = todos.find(todo => todo.id === +id)
+    console.log("detail", todo)
 
-    const { state: todo } = useLocation() //링크 태그로 들어와야 데이터가 들어옴
+
+    // const { state: todo } = useLocation() //링크 태그로 들어와야 데이터가 들어옴
 
     useEffect(() => {
         if (!todo) {
             navigate('/')
         }
-    }, [navigate, todo]) //
+    }, [navigate, todo]) // todo 값이 없으면 홈으로 돌아가는 useEffect
     console.log(todo)
 
+    const addLike = () => {
+        dispatch(addLikeTodo({ id: todo.id }))
+    }
 
 
     // console.log("detail", todos)
@@ -35,6 +43,7 @@ const Detail = () => {
                 <ListLine />
                 <TextBox>
                     <h1>{todo?.title}</h1>
+                    <p><span onClick={addLike}><FcLike /></span>&nbsp;{todo?.like}</p>
                     <h4>{todo?.body}</h4>
                 </TextBox>
             </DetailBox>
@@ -49,7 +58,6 @@ const Container = styled.div`
                 width: 100%;
                 height: 600px;
                 margin: 200px auto;
-
                 `;
 
 const DetailBox = styled.div`
@@ -88,12 +96,21 @@ const BtnBox = styled.div`
                 `;
 
 const ListLine = styled.div`
-margin: 35px auto;
-border-bottom: 2px solid #463f6b;
+    margin: 35px auto;
+    border-bottom: 2px solid #463f6b;
 
 `
 
 const TextBox = styled.div`
+    span {
+        font-size: 38px
+    }
+    p{
+        font-size: 30px;
+        line-height: 1.5;
+        display:flex;
+        justify-content: flex-end;
+    }
     h1{
         font-size: 60px;
         margin-bottom: 100px;
