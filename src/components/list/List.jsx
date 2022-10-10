@@ -1,75 +1,85 @@
 import React from 'react'
 import Todo from '../todo/Todo'
-import './style.css';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-function List({ setTodos, todos }) {
-    const onDeleteHandler = (todoId) => {
-        const newTodos = todos.filter((todo) => {
-            return todo.id !== todoId; //제거 (todo.id 같지 않은 것들은 => newTodos 이동 / 같은 id 인 객체를 삭제) 
+function List() {
+    const todos = useSelector(state => state.todos)
+    console.log("todos", todos)
 
-        })
-        setTodos(newTodos)
-        console.log("1 ", todoId)
-        console.log("2 ", todos)
-
-    }
-    const onEditHandler = (todoId) => {
-        const newTodos = todos.map((todo) => {
-
-            if (todo.id === todoId) {
-                return { ...todo, isDone: !todo.isDone };
-            } else {
-                return { ...todo };
-            }
-        });
-        console.log(newTodos)
-        setTodos(newTodos);
-        //버튼을 누르면 바꿔주고 아래로 내려보냄 그럼 isDone 바꿔줘ㅏ야힘
-
-    }
     return (
-        <div className='list-container'>
-            <h1>List 📝</h1>
-            <div className='list-wrapper'>
-                {todos.map((todo) => {
-                    if (!todo.isDone) {
-                        return (
-                            <Todo
-                                todo={todo}
-                                key={todo.id}
-                                setTodos={setTodos}
-                                onDeleteHandler={onDeleteHandler}
-                                onEditHandler={onEditHandler}
-                            />
-                        )
-                    } else {
-                        return null;
-                    }
+        <ListContainer>
 
-                })}
-            </div>
-            <div className='list-line'></div>
-            <h1>Done ✅</h1>
-            <div className='list-wrapper'>
-                {todos.map((todo) => {
-                    if (todo.isDone) {
-                        return (
-                            <Todo
-                                todo={todo}
-                                key={todo.id}
-                                setTodos={setTodos}
-                                onDeleteHandler={onDeleteHandler}
-                                onEditHandler={onEditHandler}
-                            />
-                        )
-                    } else {
-                        return null;
-                    }
+            <h1>🏃‍♂️ Working 🏃‍♀️</h1>
+            <ListAll>
+                <ListWrapper>
+                    {todos.filter(todo => !todo.isDone).map(todo => <Todo key={todo.id} todo={todo} />)}
+                </ListWrapper>
+            </ListAll>
+            <ListLine />
+            <h2>💃 Done 🕺</h2>
+            <ListAll>
+                <ListWrapper>
+                    {todos.filter(todo => todo.isDone).map(todo => <Todo key={todo.id} todo={todo} />)}
+                </ListWrapper>
+            </ListAll>
 
-                })}
-            </div>
-        </div>
+
+
+        </ListContainer>
     )
 }
 
 export default List
+
+const ListContainer = styled.div`
+    
+    h1{
+        font-size: 32px;
+        margin: 21px auto;
+        font-weight: 700;
+        height: 47px
+    }
+    h2{
+        font-size: 32px;
+        margin: 30px 0 25px 0;
+        font-weight: 700;
+        height: 47px
+    }
+    color: #463f6b;
+    padding: 20px 24px 50px 24px;
+
+`
+const ListLine = styled.div`
+    margin: 45px auto;
+    border-bottom: 2px solid #463f6b;
+
+`
+
+const ListAll = styled.div`
+    margin: auto;
+    width: 100%;
+`
+
+const ListWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+
+`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
